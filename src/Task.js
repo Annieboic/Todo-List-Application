@@ -1,21 +1,38 @@
 import React from 'react';
-import {EditIcon, HStack, IconButton, Text} from "@chakra-ui/icons";
-
-
+import {DeleteIcon, EditIcon, Flex, HStack, IconButton, Text} from "@chakra-ui/icons";
 
 
 const Task = ({ task }) => {
     return (
-        <HStack spacing={2}>
+
+        <Flex justify="center" mt={4} >
+        <HStack>
+
+
+
+
+
             <Text>{task.name}</Text>
 
-           <IconButton
+            <IconButton
                variant="outline"
-               colorScheme="teal"
-           icon={<EditIcon />}/>
+               colorScheme="green"
+               icon={<EditIcon />}
+               size="xs"
+               ml={3}/>
+
+             <IconButton
+            icon={<DeleteIcon />}
+            size="xs"
+            ml={3}
+            colorScheme="red"
+            variant="outline"
+
+            />
 
 
         </HStack>
+        </Flex>
 
     );
 };
