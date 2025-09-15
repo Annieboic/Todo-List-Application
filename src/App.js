@@ -9,7 +9,35 @@ function App() {
     const[newTask, setNewTask] = useState('');
     const[editingId, setEditingId] = useState(null);  // id here
 
+
+    //delete button
+    const deleteTask = (id) => {
+        setTasks((prevTasks) => prevTasks.filter((task) =>
+            task.id !== id
+        ))
+    }
+
+    //edit function
+
+    const editTask = (id) => {
+    const taskEdit = tasks.find(task => task.id === id); //found object
+        setEditingId(taskEdit.id);
+        setNewTask(taskEdit.name)
+
+    }
+
+    //toggle
+
+    const toggleCheckbox = (id) => {
+        setTasks((prevTasks)=> prevTasks.map(task =>
+        task.id === id ? {...task, completed: !task.completed} : task))
+    }
+
+
+
+
 //for Add (to list) button - if editing not null / new input
+
     const handleAddTask = () => {
 
         if(editingId != null){
@@ -33,11 +61,15 @@ function App() {
 
 
         <Input placeholder="Enter Task" size="md" width={300} mt={4} value={newTask} onChange={(e) => setNewTask(e.target.value)}/>
-        <Button variant="outline" ml={4} onClick={handleAddTask}>Add</Button>
+        <Button variant="outline" ml={4} onClick={handleAddTask}>
+            {editingId != null ? "OK" : "Add"}</Button>
 
 
         <TaskList
-            tasks={tasks}/>
+            tasks={tasks}
+            deleteTask={deleteTask}
+            toggleCheckbox={toggleCheckbox}
+            editTask={editTask}/>
 
     </div>
   );

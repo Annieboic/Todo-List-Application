@@ -1,25 +1,24 @@
 import React from 'react';
-import {DeleteIcon, EditIcon, Flex, HStack, IconButton, Text} from "@chakra-ui/icons";
+import {Checkbox, DeleteIcon, EditIcon, Flex, HStack, IconButton, Text} from "@chakra-ui/icons";
 
 
-const Task = ({ task }) => {
+const Task = ({ task,deleteTask,toggleCheckbox,editTask }) => {
     return (
 
         <Flex justify="center" mt={4} >
         <HStack>
+            <Checkbox size="lg" isChecked={task.completed}
+                      onChange={() => toggleCheckbox(task.id)}>
+                <Text textDecoration={task.completed ? "line-through" : "none"}>{task.name}</Text></Checkbox>
 
-
-
-
-
-            <Text>{task.name}</Text>
 
             <IconButton
                variant="outline"
                colorScheme="green"
                icon={<EditIcon />}
                size="xs"
-               ml={3}/>
+               ml={3}
+               onClick={() => editTask(task.id)}/>
 
              <IconButton
             icon={<DeleteIcon />}
@@ -27,6 +26,7 @@ const Task = ({ task }) => {
             ml={3}
             colorScheme="red"
             variant="outline"
+            onClick={() => deleteTask(task.id)}
 
             />
 
